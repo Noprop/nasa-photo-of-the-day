@@ -6,16 +6,27 @@ import Credit from './Credit';
 import Date from './Date';
 import Description from './Description';
 
-function Container() {
+function Container(props) {
   const [data, setData] = useState([]);
+  
   useEffect(() => {
-    Axios.get('https://api.nasa.gov/planetary/apod?api_key=Lewanao5JfGr3UjXpnlzqJSdcXwTj6umRE0M4D2q')
+    if(props.newDate === ""){
+      Axios.get('https://api.nasa.gov/planetary/apod?api_key=Lewanao5JfGr3UjXpnlzqJSdcXwTj6umRE0M4D2q')
       .then(res => {
         console.log('Received data...');
         setData(res.data);
       })
       .catch(err => console.log('Error occurred: ' + err));
-  }, [])
+    }else{
+      Axios.get(`https://api.nasa.gov/planetary/apod?api_key=Lewanao5JfGr3UjXpnlzqJSdcXwTj6umRE0M4D2q&date=${props.newDate}`)
+      .then(res => {
+        console.log('Received data...');
+        setData(res.data);
+      })
+      .catch(err => console.log('Error occurred: ' + err));
+    }
+    
+  }, [props.newDate])
   
   return (
     <div className="container">

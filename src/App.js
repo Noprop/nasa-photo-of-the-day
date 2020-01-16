@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import Container from './Components/Body/Container'
+import Container from './Components/Body/Container';
+import Header from './Components/Head/Header';
 
 function App() {
+  const [date, setDate] = useState("");
+  console.log(date);
+
   return (
     <div className="App">
-      <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun 🚀!
-      </p>
-      <Container />
+      <Header newDate={setDate} />
+      <Container newDate={date} />
     </div>
   );
 }
 
 export default App;
+//date={data.date} 
